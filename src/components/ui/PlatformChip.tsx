@@ -10,33 +10,29 @@ interface PlatformChipProps {
   onToggle: () => void;
 }
 
-export function PlatformChip({
-  platform,
-  selected,
-  onToggle,
-}: PlatformChipProps) {
+export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps) {
   return (
     <motion.button
       onClick={onToggle}
       whileTap={{ scale: 0.95 }}
       className={clsx(
-        "w-20 h-24 rounded-xl border flex flex-col items-center justify-center gap-1.5 cursor-pointer transition-all duration-200",
+        "w-[72px] h-[84px] rounded-lg border flex flex-col items-center justify-center gap-1 cursor-pointer transition-all duration-200",
         selected
-          ? "bg-surface border-primary ring-2 ring-primary/50"
+          ? "bg-primary/10 border-primary ring-1 ring-primary/40"
           : "bg-surface border-border hover:border-text-muted/20"
       )}
     >
       <div
         className={clsx(
-          "w-10 h-10 flex items-center justify-center text-2xl transition-all duration-200",
-          selected ? "grayscale-0 opacity-100" : "grayscale opacity-50"
+          "w-8 h-8 flex items-center justify-center text-xl transition-all duration-200",
+          selected ? "grayscale-0 opacity-100" : "grayscale opacity-40"
         )}
       >
         {platform.logo}
       </div>
       <span
         className={clsx(
-          "text-[10px] font-medium truncate w-full text-center px-1 transition-colors",
+          "text-[9px] font-medium truncate w-full text-center px-1 transition-colors leading-tight",
           selected ? "text-text-primary" : "text-text-muted"
         )}
       >
