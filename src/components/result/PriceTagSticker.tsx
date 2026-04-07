@@ -158,7 +158,7 @@ export function PriceTagSticker({ total }: PriceTagStickerProps) {
         onClick={handleShare}
         disabled={sharing}
         variants={fadeInUp}
-        className="mt-6 px-8 py-3 rounded-full bg-accent text-background font-medium text-sm hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
+        className="mt-6 px-8 py-3 rounded-full bg-accent text-white font-medium text-sm hover:brightness-110 transition-all cursor-pointer disabled:opacity-50"
       >
         {sharing ? "Generating..." : "📤 Share Price Tag"}
       </motion.button>

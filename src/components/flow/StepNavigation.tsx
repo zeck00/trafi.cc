@@ -35,7 +35,7 @@ export function StepNavigation({
         className={clsx(
           "px-6 py-2.5 rounded-full text-sm font-medium transition-all cursor-pointer",
           canNext
-            ? "bg-accent text-background hover:brightness-110"
+            ? "bg-accent text-white hover:brightness-110"
             : "bg-surface text-text-muted cursor-not-allowed opacity-50"
         )}
       >

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { sources } from "@/data/sources";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "How We Calculate Your Digital Price Tag | trafi.cc",
@@ -37,13 +38,14 @@ export default function MethodologyPage() {
 
   return (
     <div className="min-h-dvh bg-background text-text-primary">
-      <header className="px-5 py-4 border-b border-border">
+      <header className="flex items-center justify-between px-5 py-4 border-b border-border">
         <Link
           href="/"
           className="text-sm font-medium font-[family-name:var(--font-heading)] text-text-muted hover:text-text-primary transition-colors"
         >
           ← Back to calculator
         </Link>
+        <ThemeToggle />
       </header>
 
       <main className="max-w-2xl mx-auto px-5 py-12">
@@ -166,7 +168,7 @@ export default function MethodologyPage() {
           </p>
           <Link
             href="/"
-            className="inline-block px-8 py-3 rounded-full bg-accent text-background font-medium text-sm hover:brightness-110 transition-all"
+            className="inline-block px-8 py-3 rounded-full bg-accent text-white font-medium text-sm hover:brightness-110 transition-all"
           >
             Calculate My Worth
           </Link>

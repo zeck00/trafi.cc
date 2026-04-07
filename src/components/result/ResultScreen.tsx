@@ -31,7 +31,7 @@ export function ResultScreen({ result, onReset }: ResultScreenProps) {
         <PriceTagSticker total={result.totalAnnual} />
 
         <motion.div
-          className="text-center pt-8"
+          className="text-center pt-8 space-y-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -43,6 +43,41 @@ export function ResultScreen({ result, onReset }: ResultScreenProps) {
           >
             Start over
           </button>
+          <div className="flex items-center justify-center gap-4 text-xs text-text-muted pt-4">
+            <a
+              href="https://ziad.us"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-primary transition-colors"
+            >
+              About me
+            </a>
+            <span className="opacity-30">|</span>
+            <a
+              href="https://pay.ziina.com/zeq0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-accent transition-colors"
+            >
+              Support me
+            </a>
+            <span className="opacity-30">|</span>
+            <a
+              href="https://github.com/zeck00/trafi.cc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-primary transition-colors"
+            >
+              GitHub
+            </a>
+            <span className="opacity-30">|</span>
+            <a
+              href="/methodology"
+              className="hover:text-text-primary transition-colors"
+            >
+              How it works
+            </a>
+          </div>
         </motion.div>
       </div>
     </div>

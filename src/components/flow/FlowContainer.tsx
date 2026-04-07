@@ -6,6 +6,7 @@ import { stepVariants, stepTransition, reducedMotionTransition } from "@/lib/ani
 import { FlowProvider, useFlowState, useFlowDispatch } from "@/hooks/useFlowState";
 import { ProgressBar } from "./ProgressBar";
 import { StepNavigation } from "./StepNavigation";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { StepPlatforms } from "./StepPlatforms";
 import { StepDemographics } from "./StepDemographics";
 import { StepInterests } from "./StepInterests";
@@ -62,8 +63,11 @@ function FlowContent() {
 
   return (
     <div className="flex flex-col min-h-dvh">
-      <div className="px-5 pt-4">
-        <ProgressBar step={state.step} />
+      <div className="flex items-center gap-3 px-5 pt-4">
+        <div className="flex-1">
+          <ProgressBar step={state.step} />
+        </div>
+        <ThemeToggle />
       </div>
 
       <div className="flex-1 flex flex-col justify-center px-5 py-8 max-w-lg mx-auto w-full">
