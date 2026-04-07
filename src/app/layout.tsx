@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   title: "trafi.cc — You ARE traffic",
   description:
     "See how much you're worth to Google, Meta, TikTok, and data brokers — based on real published CPM rates. Generate your shareable digital price tag.",
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     title: "trafi.cc — You ARE traffic",
     description:
