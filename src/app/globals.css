@@ -1,13 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0A0A0F;
-  --color-surface: #141420;
   --color-primary: #3B82F6;
   --color-accent: #22C55E;
-  --color-text-primary: #F8FAFC;
-  --color-text-muted: #94A3B8;
-  --color-border: rgba(255, 255, 255, 0.08);
   --color-destructive: #EF4444;
 
   --font-heading: "Space Grotesk", sans-serif;
@@ -15,13 +10,33 @@
   --font-mono: "JetBrains Mono", monospace;
 }
 
+/* Light mode (default) */
+:root {
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #0F172A;
+  --color-text-muted: #64748B;
+  --color-border: rgba(0, 0, 0, 0.08);
+  color-scheme: light;
+}
+
+/* Dark mode */
+.dark {
+  --color-background: #0A0A0F;
+  --color-surface: #141420;
+  --color-text-primary: #F8FAFC;
+  --color-text-muted: #94A3B8;
+  --color-border: rgba(255, 255, 255, 0.08);
+  color-scheme: dark;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Smooth scrolling for result screen */
 html {
   scroll-behavior: smooth;
 }
@@ -35,4 +50,10 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Fix select option colors in dark mode */
+.dark select option {
+  background: #141420;
+  color: #F8FAFC;
 }
