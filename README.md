@@ -101,9 +101,13 @@ Full details with all sources at **[trafi.cc/methodology](https://trafi.cc/metho
 
 If you found this interesting or want to help keep it running:
 
-- ☕ **[Buy me a coffee](https://pay.ziina.com/zeq0)**
-- ⭐ **Star this repo**
-- 🔗 **Share your price tag**
+<div align="center">
+
+[![☕ Buy me a coffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-ffdd00?style=for-the-badge)](https://pay.ziina.com/zeq0)
+[![⭐ Star this repo](https://img.shields.io/badge/⭐_Star_this_repo-333?style=for-the-badge&logo=github)](https://github.com/zeck00/trafi.cc)
+[![🔗 Share your price tag](https://img.shields.io/badge/🔗_Share_your_price_tag-3B82F6?style=for-the-badge)](https://trafi.cc)
+
+</div>
 
 ## 📄 License
 
