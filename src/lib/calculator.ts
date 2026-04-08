@@ -9,20 +9,26 @@ import { platforms } from "@/data/platforms";
 import { getCountry, referenceCountries, type Region } from "@/data/countries";
 import { interestMultipliers } from "@/data/interests";
 
+// Source: WordStream/Revealbot industry CPM benchmarks, advertiser bid data.
+// 35-54 is the most valuable demographic (highest purchasing power + digital engagement).
+// Teens are restricted by COPPA/regulations. Tier 3 estimates.
 const ageMultipliers: Record<string, number> = {
-  "13-17": 0.6,
-  "18-24": 1.1,
-  "25-34": 1.3,
-  "35-44": 1.2,
-  "45-54": 1.0,
-  "55-64": 0.85,
-  "65+": 0.7,
+  "13-17": 0.5,    // COPPA restrictions, limited ad targeting
+  "18-24": 0.85,   // High engagement, lower purchasing power
+  "25-34": 1.0,    // Baseline
+  "35-44": 1.2,    // Peak purchasing power + engagement
+  "45-54": 1.3,    // Highest purchasing power
+  "55-64": 1.1,    // High income, declining digital engagement
+  "65+": 0.8,      // Lower digital engagement + ad spend targeting
 };
 
+// Source: Tenjin/Liftoff mobile benchmarks 2024.
+// iOS CPMs are 2-3x higher than Android (higher purchasing power + ATT scarcity).
+// Desktop falls between the two. Tier 3 estimates.
 const deviceMultipliers: Record<string, number> = {
-  ios: 1.2,
-  android: 0.9,
-  desktop: 1.0,
+  ios: 1.3,       // 2-3x Android CPMs → normalized multiplier
+  android: 0.8,   // Lower CPMs globally
+  desktop: 1.0,   // Baseline
 };
 
 const ageMidpoints: Record<string, number> = {
