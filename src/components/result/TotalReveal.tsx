@@ -7,6 +7,10 @@ import { useCountUp } from "@/hooks/useCountUp";
 export function TotalReveal({ total }: { total: number }) {
   const displayValue = useCountUp(total, 2000, 600);
 
+  function scrollToSticker() {
+    document.getElementById("price-tag")?.scrollIntoView({ behavior: "smooth" });
+  }
+
   return (
     <motion.section
       className="min-h-dvh flex flex-col items-center justify-center px-5 text-center"
@@ -46,11 +50,22 @@ export function TotalReveal({ total }: { total: number }) {
         to advertisers.
       </motion.p>
 
+      <motion.button
+        onClick={scrollToSticker}
+        className="mt-10 px-6 py-2.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-medium hover:bg-primary/20 transition-all cursor-pointer"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 3.2, duration: 0.5 }}
+        whileTap={{ scale: 0.97 }}
+      >
+        🏷️ Get my price tag
+      </motion.button>
+
       <motion.div
-        className="mt-12 text-text-muted"
+        className="mt-8 text-text-muted"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2, duration: 0.5 }}
+        transition={{ delay: 3.5, duration: 0.5 }}
       >
         <motion.span
           animate={{ y: [0, 6, 0] }}

@@ -60,7 +60,8 @@ export function PriceTagSticker({ total }: PriceTagStickerProps) {
 
   return (
     <motion.section
-      className="flex flex-col items-center"
+      id="price-tag"
+      className="flex flex-col items-center scroll-mt-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
