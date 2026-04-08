@@ -16,7 +16,7 @@ export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps
       onClick={onToggle}
       whileTap={{ scale: 0.95 }}
       className={clsx(
-        "w-[72px] h-[84px] rounded-lg border flex flex-col items-center justify-center gap-1 cursor-pointer transition-all duration-200",
+        "min-w-[72px] flex-1 h-[84px] rounded-lg border flex flex-col items-center justify-center gap-1 cursor-pointer transition-all duration-200",
         selected
           ? "bg-primary/10 border-primary ring-1 ring-primary/40"
           : "bg-surface border-border hover:border-text-muted/20"

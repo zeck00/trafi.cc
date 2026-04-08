@@ -85,8 +85,8 @@ export function StepPlatforms() {
         </p>
       )}
 
-      {/* Platform grid */}
-      <div className="space-y-4 max-h-[52vh] overflow-y-auto pr-1">
+      {/* Platform grid — hidden scrollbar */}
+      <div className="space-y-5 max-h-[52vh] overflow-y-auto no-scrollbar">
         {filteredCategories.map((cat) => {
           const catPlatforms = filtered.filter((p) => p.category === cat.id);
           const allSelected = catPlatforms.every((p) =>
@@ -106,7 +106,7 @@ export function StepPlatforms() {
                 </button>
               </div>
               <motion.div
-                className="flex flex-wrap gap-1.5"
+                className="grid grid-cols-4 sm:grid-cols-5 gap-2"
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
