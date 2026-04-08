@@ -101,7 +101,7 @@ export default function MethodologyPage() {
             <p className="text-sm border border-border rounded-lg p-4 bg-surface">
               <strong className="text-text-primary">Formula:</strong>{" "}
               <code className="font-[family-name:var(--font-mono)] text-primary">
-                Your Value = Base ARPU × Age × Device × Interest × 0.55
+                Your Value = Platform ARPU × Age × Device × Interest × 0.20
               </code>
             </p>
             <p>
@@ -135,10 +135,18 @@ export default function MethodologyPage() {
             </ul>
             <p>
               The{" "}
-              <strong className="text-text-primary">0.55x realism factor</strong>{" "}
-              accounts for the fact that not every user generates the full platform ARPU.
-              It varies based on engagement level, ad blocker usage, premium subscriptions
-              (which reduce ad exposure), and time spent on platform.
+              <strong className="text-text-primary">0.20x data value fraction</strong>{" "}
+              reflects that your raw data is only part of the equation. Platforms
+              capture most of the ARPU through their ad infrastructure, targeting
+              algorithms, sales teams, and real-time auction systems. Your data
+              enables the targeting, but the platform does the heavy lifting to
+              monetize it. Industry estimates and FTC reports suggest raw personal
+              data accounts for roughly 15-25% of platform ad revenue.
+            </p>
+            <p>
+              We also cap <strong className="text-text-primary">platform families</strong> —
+              selecting both Facebook and Instagram won&apos;t double-count Meta&apos;s
+              ARPU, since they share the same parent ad infrastructure.
             </p>
           </div>
         </section>

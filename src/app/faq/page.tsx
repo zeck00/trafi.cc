@@ -49,7 +49,7 @@ const faqItems = [
   },
   {
     q: "How accurate is this calculator?",
-    a: "It depends on the platform. For Meta, Snap, Pinterest, and Reddit, we use directly reported ARPU from SEC filings (Tier 1). For Google and Amazon, we derive values from reported revenue and user counts (Tier 2). For private companies like TikTok and smaller platforms, we use industry estimates (Tier 3). We apply a 0.55x realism factor because not every user generates the full platform ARPU.",
+    a: "It depends on the platform. For Meta, Snap, Pinterest, and Reddit, we use directly reported ARPU from SEC filings (Tier 1). For Google and Amazon, we derive values from reported revenue and user counts (Tier 2). For private companies like TikTok, we use industry estimates (Tier 3). We apply a 0.20x data value fraction because your raw data is only ~20% of what makes the ad system work — the platform's infrastructure captures the rest. We also cap platform families (e.g., Facebook + Instagram don't double-count Meta's total ARPU).",
   },
   {
     q: "What's the difference between the data tiers?",

@@ -70,7 +70,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <Stat value="$2–50" label="per year" />
+          <Stat value="$5–150" label="per year" />
           <div className="w-px h-8 bg-border" />
           <Stat value="50+" label="platforms" />
           <div className="w-px h-8 bg-border" />

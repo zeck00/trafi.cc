@@ -49,6 +49,8 @@ Strava, MyFitnessPal, Peloton
 - TikTok: $82 NA (estimated from ~$14B US ad revenue / ~170M US users)
 
 ## Demographic Multipliers
+- Data value fraction: 0.20x (your data is ~20% of platform ARPU; the rest is ad infrastructure value)
+- Platform family capping: FB+IG capped at Meta total, Google+YouTube capped at Alphabet total
 - Age: 13-17 (0.5x), 18-24 (0.85x), 25-34 (1.0x baseline), 35-44 (1.2x), 45-54 (1.3x), 55-64 (1.1x), 65+ (0.8x)
 - Device: iOS (1.3x), Android (0.8x), Desktop (1.0x)
 - Interests: Luxury (1.6x), Investing (1.5x), Travel (1.4x), Automotive (1.3x), Tech (1.2x), Parenting (1.15x), Fashion (1.15x), Gaming (1.1x), Beauty (1.1x), Fitness/Home/Pets/Sports/Food (0.95-1.05x)

@@ -48,6 +48,24 @@ const dataTypeLabels: Record<DataType, string> = {
   social_graph: "Social Graph",
 };
 
+// Platform families — these share the same parent ARPU pool.
+// When multiple platforms from the same family are selected,
+// their combined value is capped at the parent's total ARPU.
+const platformFamilies: Record<string, string[]> = {
+  meta: ["facebook", "instagram", "whatsapp", "messenger", "threads"],
+  alphabet: ["google", "youtube"],
+  amazon_family: ["amazon", "primevideo", "twitch"],
+  match: ["tinder", "hinge"],
+  paypal_family: ["paypal", "venmo"],
+};
+
+// The base ARPU represents what the PLATFORM earns per user.
+// Your DATA's value is a fraction of that — the platform captures most value
+// through their ad infrastructure, sales teams, and targeting algorithms.
+// Industry estimates: raw data value ≈ 20% of platform ARPU.
+// Source: Various academic papers on "value of personal data" + FTC data broker reports.
+const DATA_VALUE_FRACTION = 0.20;
+
 function countryToRegion(code: string | null): Region {
   if (!code) return "na";
   const country = getCountry(code);
@@ -76,7 +94,7 @@ function computeForRegion(
     const platform = platforms.find((p) => p.id === id);
     if (!platform) continue;
     const base = platform.arpu[region];
-    total += base * ageMult * devMult * intMult * 0.55;
+    total += base * ageMult * devMult * intMult * DATA_VALUE_FRACTION;
   }
   return total;
 }
@@ -87,15 +105,44 @@ export function calculate(state: FlowState): CalculationResult {
   const devMult = deviceMultipliers[state.device ?? "ios"] ?? 1.0;
   const intMult = computeInterestMultiplier(state.interests);
 
-  const platformResults = state.selectedPlatforms
+  const rawResults = state.selectedPlatforms
     .map((id) => {
       const platform = platforms.find((p) => p.id === id);
       if (!platform) return null;
       const base = platform.arpu[region];
-      const annualValue = base * ageMult * devMult * intMult * 0.55;
+      const annualValue = base * ageMult * devMult * intMult * DATA_VALUE_FRACTION;
       return { platform, annualValue };
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
+
+  // Cap platform families — selecting FB+IG shouldn't exceed Meta's total ARPP
+  // The individual platform ARPUs already represent portions of the family total,
+  // but when all are selected the sum can overshoot. Cap at family-level max.
+  const familyTotals = new Map<string, number>();
+  const familyCaps = new Map<string, number>();
+
+  for (const [family, members] of Object.entries(platformFamilies)) {
+    const selected = rawResults.filter((r) => members.includes(r.platform.id));
+    if (selected.length <= 1) continue;
+    const sum = selected.reduce((s, r) => s + r.annualValue, 0);
+    const maxMember = Math.max(...selected.map((r) => r.annualValue));
+    // Family cap: largest member × 1.3 (some additive value, but not fully stacked)
+    const cap = maxMember * 1.3;
+    if (sum > cap) {
+      familyTotals.set(family, sum);
+      familyCaps.set(family, cap);
+    }
+  }
+
+  const platformResults = rawResults.map((r) => {
+    for (const [family, members] of Object.entries(platformFamilies)) {
+      if (members.includes(r.platform.id) && familyTotals.has(family)) {
+        const ratio = familyCaps.get(family)! / familyTotals.get(family)!;
+        return { ...r, annualValue: r.annualValue * ratio };
+      }
+    }
+    return r;
+  });
 
   const totalAnnual = platformResults.reduce(
     (sum, p) => sum + p.annualValue,

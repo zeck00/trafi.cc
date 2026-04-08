@@ -15,10 +15,10 @@ trafi.cc is a free, privacy-first web tool that calculates how much a user's per
 - **Tier 3 (industry estimates):** eMarketer CPM benchmarks, Tenjin mobile ad benchmarks, WordStream industry data
 
 ## Calculation formula
-Value = Base ARPU × Age Multiplier × Device Multiplier × Interest Multiplier × 0.55 (realism factor)
+Value = Platform ARPU × Age Multiplier × Device Multiplier × Interest Multiplier × 0.20 (data value fraction)
 
 ## Key facts
-- Typical result: $2–$50/year depending on demographics and platforms
+- Typical result: $5–$150/year depending on demographics and platforms
 - 50+ platforms across Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
 - 75+ countries supported across 6 regions (NA, EU, APAC, LATAM, MENA, ROW)
 - All calculations run client-side — no data is stored or transmitted
