@@ -86,7 +86,7 @@ export default function MethodologyPage() {
               <span className="font-bold text-text-muted">Tier 3 — Industry Estimate</span>
               <p className="text-text-muted mt-1">
                 Estimated from analyst reports, press coverage, or CPM benchmarks. Directionally reliable but not audited.
-                Applies to: <strong className="text-text-primary">TikTok, X/Twitter, LinkedIn, WhatsApp, messaging apps, delivery, regional platforms, fintech, health/fitness</strong>.
+                Applies to: <strong className="text-text-primary">TikTok, X/Twitter, LinkedIn, WhatsApp, AI platforms (ChatGPT, Claude, Gemini, Copilot, Perplexity, Grok, Meta AI, Midjourney), messaging, delivery, regional platforms, fintech, health/fitness</strong>.
               </p>
             </div>
           </div>
@@ -117,13 +117,13 @@ export default function MethodologyPage() {
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li>
                 <strong className="text-text-primary">Age</strong> — Users aged
-                35-54 are the most valuable (1.2-1.3x) due to peak purchasing power.
+                35-54 are the most valuable (1.15-1.2x) due to peak purchasing power.
                 Teens (13-17) are worth ~50% less due to COPPA regulations limiting ad targeting.
                 <span className="text-xs opacity-60 block ml-6">Source: Advertiser bid data, WordStream industry benchmarks</span>
               </li>
               <li>
                 <strong className="text-text-primary">Device</strong> — iOS
-                users command 2-3x higher CPMs than Android. We normalize this to a 1.3x/0.8x multiplier.
+                users command 2-3x higher CPMs than Android. We normalize this to a 1.2x/0.85x multiplier.
                 <span className="text-xs opacity-60 block ml-6">Source: Tenjin/Liftoff Mobile Ad Benchmarks 2024</span>
               </li>
               <li>
@@ -144,9 +144,16 @@ export default function MethodologyPage() {
               data accounts for roughly 15-25% of platform ad revenue.
             </p>
             <p>
+              The combined demographic multiplier (age x device x interest) is{" "}
+              <strong className="text-text-primary">capped at 1.8x</strong> to
+              prevent unrealistic compounding at the extremes.
+            </p>
+            <p>
               We also cap <strong className="text-text-primary">platform families</strong> —
               selecting both Facebook and Instagram won&apos;t double-count Meta&apos;s
-              ARPU, since they share the same parent ad infrastructure.
+              ARPU, since they share the same parent ad infrastructure. Family
+              caps are based on the parent company&apos;s reported ARPU: Meta
+              at $268, Alphabet at $280, Amazon at $180 (all US &amp; Canada, FY2024).
             </p>
           </div>
         </section>
