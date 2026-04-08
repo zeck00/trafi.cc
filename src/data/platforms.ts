@@ -168,7 +168,7 @@ export const platforms: Platform[] = [
   // Amazon Ads: $56.2B ad revenue FY2024 (10-K). ~310M active customers.
   // NA ~60% of revenue. Source: ir.aboutamazon.com. Tier 2 (derived).
   {
-    id: "amazon", name: "Amazon", category: "shopping", logo: "/logos/amazon.png",
+    id: "amazon", name: "Amazon", category: "shopping", logo: "/logos/amazon.svg",
     arpu: { na: 109.0, eu: 32.0, apac: 8.0, latam: 3.0, mena: 4.0, row: 2.0 },
     dataTypes: [{ type: "purchase_intent", weight: 0.6 }, { type: "browsing", weight: 0.25 }, { type: "location", weight: 0.1 }, { type: "social_graph", weight: 0.05 }],
   },
@@ -181,7 +181,7 @@ export const platforms: Platform[] = [
   },
   // Shein: Private. ~$2B ad revenue estimated. ~150M users. Tier 3.
   {
-    id: "shein", name: "Shein", category: "shopping", logo: "/logos/shein.png",
+    id: "shein", name: "Shein", category: "shopping", logo: "/logos/shein.svg",
     arpu: { na: 10.0, eu: 5.0, apac: 2.0, latam: 1.5, mena: 1.2, row: 0.8 },
     dataTypes: [{ type: "purchase_intent", weight: 0.55 }, { type: "browsing", weight: 0.3 }, { type: "location", weight: 0.1 }, { type: "social_graph", weight: 0.05 }],
   },
@@ -217,7 +217,7 @@ export const platforms: Platform[] = [
   },
   // Noon: Private, MENA-only. Estimated. Tier 3.
   {
-    id: "noon", name: "Noon", category: "shopping", logo: "/logos/noon.png",
+    id: "noon", name: "Noon", category: "shopping", logo: "/logos/noon.svg",
     arpu: { na: 0.1, eu: 0.1, apac: 0.1, latam: 0.1, mena: 8.0, row: 0.1 },
     dataTypes: [{ type: "purchase_intent", weight: 0.6 }, { type: "browsing", weight: 0.25 }, { type: "location", weight: 0.1 }, { type: "social_graph", weight: 0.05 }],
   },
@@ -241,7 +241,7 @@ export const platforms: Platform[] = [
   },
   // Disney+: Ad tier ~$1B revenue, ~37M ad-sub users. Blended. Tier 3.
   {
-    id: "disney", name: "Disney+", category: "streaming", logo: "/logos/disney.png",
+    id: "disney", name: "Disney+", category: "streaming", logo: "/logos/disney.svg",
     arpu: { na: 5.0, eu: 2.5, apac: 0.8, latam: 0.6, mena: 0.5, row: 0.4 },
     dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.25 }, { type: "social_graph", weight: 0.15 }, { type: "location", weight: 0.1 }],
   },
@@ -253,7 +253,7 @@ export const platforms: Platform[] = [
   },
   // Prime Video: Amazon ad tier launched early 2024. Early revenue. Tier 3.
   {
-    id: "primevideo", name: "Prime Video", category: "streaming", logo: "/logos/primevideo.png",
+    id: "primevideo", name: "Prime Video", category: "streaming", logo: "/logos/primevideo.svg",
     arpu: { na: 5.0, eu: 3.0, apac: 1.0, latam: 0.6, mena: 0.5, row: 0.3 },
     dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.25 }, { type: "social_graph", weight: 0.15 }, { type: "location", weight: 0.1 }],
   },

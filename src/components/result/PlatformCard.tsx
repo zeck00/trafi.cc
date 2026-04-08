@@ -4,7 +4,7 @@ import clsx from "clsx";
 import type { PlatformResult } from "@/types";
 
 const DARK_INVERT_IDS = new Set([
-  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton",
+  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "shein",
 ]);
 
 export function PlatformCard({ platform, annualValue, proportion }: PlatformResult) {
