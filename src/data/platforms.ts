@@ -175,7 +175,7 @@ export const platforms: Platform[] = [
   // Temu: PDD Holdings FY2024. Rapid growth, heavy ad spend, but also ad revenue
   // from marketplace sellers. Estimated. Tier 3.
   {
-    id: "temu", name: "Temu", category: "shopping", logo: "/logos/temu.png",
+    id: "temu", name: "Temu", category: "shopping", logo: "/logos/temu.svg",
     arpu: { na: 12.0, eu: 6.0, apac: 1.5, latam: 1.0, mena: 1.0, row: 0.8 },
     dataTypes: [{ type: "purchase_intent", weight: 0.55 }, { type: "browsing", weight: 0.3 }, { type: "location", weight: 0.1 }, { type: "social_graph", weight: 0.05 }],
   },

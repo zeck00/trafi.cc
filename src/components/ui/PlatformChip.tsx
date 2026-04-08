@@ -3,16 +3,18 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import type { Platform } from "@/types";
+import { useTheme } from "@/hooks/useTheme";
 
-// Pure black SVGs → invert to white in dark mode
+// Black/dark SVGs that need inversion in dark mode
 const DARK_INVERT = new Set([
-  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "hinge",
+  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton",
+  "hinge", "disney", "shein",
 ]);
 
-// Dark multicolor logos → white glow so dark parts stay visible
-const DARK_GLOW = new Set([
-  "amazon", "disney", "shein",
-]);
+// Multicolor logos with dark variant files (src swap, not filter)
+const DARK_VARIANTS: Record<string, string> = {
+  amazon: "/logos/amazon-dark.svg",
+};
 
 interface PlatformChipProps {
   platform: Platform;
@@ -21,11 +23,15 @@ interface PlatformChipProps {
 }
 
 export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps) {
-  const logoClass = DARK_INVERT.has(platform.id)
-    ? "logo-invert"
-    : DARK_GLOW.has(platform.id)
-      ? "logo-glow"
-      : undefined;
+  const { resolved } = useTheme();
+  const isDark = resolved === "dark";
+
+  const logoSrc =
+    isDark && DARK_VARIANTS[platform.id]
+      ? DARK_VARIANTS[platform.id]
+      : platform.logo;
+
+  const needsInvert = isDark && DARK_INVERT.has(platform.id);
 
   return (
     <motion.button
@@ -47,9 +53,12 @@ export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps
       )}
       <div className="w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center shrink-0">
         <img
-          src={platform.logo}
+          src={logoSrc}
           alt={platform.name}
-          className={clsx("max-w-[28px] max-h-[28px] lg:max-w-[32px] lg:max-h-[32px] object-contain", logoClass)}
+          className={clsx(
+            "max-w-[28px] max-h-[28px] lg:max-w-[32px] lg:max-h-[32px] object-contain",
+            needsInvert && "logo-invert"
+          )}
           loading="lazy"
         />
       </div>
