@@ -74,40 +74,16 @@ export function Hero({ onStart }: { onStart: () => void }) {
 
       {/* Footer */}
       <motion.div
-        className="flex flex-col items-center gap-2 pb-5 text-xs text-text-muted"
+        className="pb-5 text-xs text-text-muted text-center whitespace-nowrap"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
-        <span>No signup. No data stored. Runs entirely in your browser.</span>
-        <div className="flex items-center gap-3">
-          <a
-            href="https://ziad.us"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-text-primary transition-colors"
-          >
-            About me
-          </a>
-          <span className="opacity-30">|</span>
-          <a
-            href="https://pay.ziina.com/zeq0"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-accent transition-colors"
-          >
-            Support me
-          </a>
-          <span className="opacity-30">|</span>
-          <a
-            href="https://github.com/zeck00/trafi.cc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-text-primary transition-colors"
-          >
-            GitHub
-          </a>
-        </div>
+        <a href="https://ziad.us" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">About</a>
+        {" · "}
+        <a href="https://pay.ziina.com/zeq0" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Support</a>
+        {" · "}
+        <a href="https://github.com/zeck00/trafi.cc" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">GitHub</a>
       </motion.div>
     </div>
   );
