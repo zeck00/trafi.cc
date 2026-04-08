@@ -1,6 +1,7 @@
 import type { Platform, PlatformCategory } from "@/types";
 
 export const platformCategories: { id: PlatformCategory; label: string }[] = [
+  { id: "ai", label: "AI" },
   { id: "social", label: "Social" },
   { id: "messaging", label: "Messaging" },
   { id: "shopping", label: "Shopping" },
@@ -406,5 +407,90 @@ export const platforms: Platform[] = [
     id: "peloton", name: "Peloton", category: "health", logo: "/logos/peloton.svg",
     arpu: { na: 3.0, eu: 1.0, apac: 0.2, latam: 0.1, mena: 0.1, row: 0.1 },
     dataTypes: [{ type: "browsing", weight: 0.4 }, { type: "purchase_intent", weight: 0.3 }, { type: "social_graph", weight: 0.2 }, { type: "location", weight: 0.1 }],
+  },
+
+  // ═══ AI ═══
+  // NOTE: AI platforms are new to advertising/data monetization. Most revenue
+  // is from subscriptions and API, not ads. The "data value" here represents
+  // what your conversations, prompts, and usage patterns are worth for model
+  // training, ad targeting, and product improvement. These are Tier 3 estimates
+  // unless noted otherwise.
+
+  // OpenAI/ChatGPT: $25B ARR (Feb 2026), 910M weekly users, ~50M paid subs.
+  // Revenue is mostly subs + API. User data used for model training (unless opted out).
+  // Data value: conversations, prompts, usage patterns, preferences.
+  // Derived: $25B / 910M weekly users ≈ $27.50 global, NA-heavy. Tier 2.
+  // Source: Sacra, SaaStr, BusinessOfApps
+  {
+    id: "chatgpt", name: "ChatGPT", category: "ai", logo: "/logos/openai.svg",
+    arpu: { na: 45.0, eu: 18.0, apac: 4.0, latam: 2.5, mena: 2.0, row: 1.5 },
+    dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.25 }, { type: "social_graph", weight: 0.1 }, { type: "location", weight: 0.15 }],
+  },
+  // Anthropic/Claude: $14B+ ARR (Feb 2026), ~12.5M MAU consumer, 300K+ business customers.
+  // 80% of revenue from enterprise. Does NOT use conversations for training (stated policy).
+  // Data value is lower per-user — mostly from usage patterns and product improvement.
+  // Derived: consumer portion ~$2.8B / 12.5M MAU ≈ $224 but mostly enterprise.
+  // Consumer data value estimated conservatively. Tier 3.
+  // Source: Sacra, SaaStr, Backlinko
+  {
+    id: "claude", name: "Claude", category: "ai", logo: "/logos/anthropic.svg",
+    arpu: { na: 15.0, eu: 8.0, apac: 2.0, latam: 1.0, mena: 0.8, row: 0.5 },
+    dataTypes: [{ type: "browsing", weight: 0.55 }, { type: "purchase_intent", weight: 0.2 }, { type: "social_graph", weight: 0.1 }, { type: "location", weight: 0.15 }],
+  },
+  // Google Gemini: Part of Google/Alphabet. Integrated into Google's ad ecosystem.
+  // Uses conversation data to improve ads and search. The value is additive to
+  // Google's existing ARPU — Gemini queries feed back into ad targeting.
+  // Estimated incremental data value. Tier 3.
+  {
+    id: "gemini", name: "Gemini", category: "ai", logo: "/logos/gemini.svg",
+    arpu: { na: 20.0, eu: 8.0, apac: 2.0, latam: 1.5, mena: 1.2, row: 0.8 },
+    dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.3 }, { type: "social_graph", weight: 0.05 }, { type: "location", weight: 0.15 }],
+  },
+  // Microsoft Copilot: 15M paying users out of 450M M365 customers.
+  // Revenue from $30/user/month Copilot tier. Data used for product improvement.
+  // Non-enterprise data value is limited. Tier 3.
+  {
+    id: "copilot", name: "Copilot", category: "ai", logo: "/logos/copilot.svg",
+    arpu: { na: 12.0, eu: 5.0, apac: 1.5, latam: 0.8, mena: 0.6, row: 0.4 },
+    dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.25 }, { type: "social_graph", weight: 0.1 }, { type: "location", weight: 0.15 }],
+  },
+  // Perplexity AI: ~$200M ARR, 45M MAU. Caught sharing data with Meta/Google
+  // via embedded trackers (April 2026 lawsuit). Abandoned ad model for subs.
+  // Data value: search queries, intent signals — extremely valuable to ad networks.
+  // Derived: $200M / 45M MAU ≈ $4.44 global. But tracker data shared with Meta/Google
+  // has additional value. Tier 2/3.
+  // Source: DemandSage, BusinessOfApps, Bloomberg lawsuit coverage
+  {
+    id: "perplexity", name: "Perplexity", category: "ai", logo: "/logos/perplexity.svg",
+    arpu: { na: 8.0, eu: 3.5, apac: 1.0, latam: 0.5, mena: 0.4, row: 0.3 },
+    dataTypes: [{ type: "browsing", weight: 0.55 }, { type: "purchase_intent", weight: 0.3 }, { type: "social_graph", weight: 0.05 }, { type: "location", weight: 0.1 }],
+  },
+  // xAI/Grok: ~$350M revenue 2025, 64M MAU. Integrated with X/Twitter.
+  // Trains on X data. Revenue from SuperGrok subs ($30/mo) + X Premium bundles.
+  // Data value: conversations + cross-pollination with X social graph.
+  // Derived: $350M / 64M MAU ≈ $5.47. Tier 3.
+  // Source: Reuters, BusinessOfApps
+  {
+    id: "grok", name: "Grok", category: "ai", logo: "/logos/grok.svg",
+    arpu: { na: 10.0, eu: 4.0, apac: 1.2, latam: 0.6, mena: 0.5, row: 0.3 },
+    dataTypes: [{ type: "browsing", weight: 0.45 }, { type: "purchase_intent", weight: 0.2 }, { type: "social_graph", weight: 0.25 }, { type: "location", weight: 0.1 }],
+  },
+  // Meta AI: Free, embedded in WhatsApp/Instagram/Facebook/Messenger.
+  // Explicitly uses conversation data for ad targeting (since Dec 2025).
+  // This is pure data-for-ads value — no subscription revenue.
+  // Value is incremental to existing Meta ARPU. Tier 3.
+  {
+    id: "metaai", name: "Meta AI", category: "ai", logo: "/logos/metaai.svg",
+    arpu: { na: 18.0, eu: 7.0, apac: 1.5, latam: 1.0, mena: 0.8, row: 0.5 },
+    dataTypes: [{ type: "browsing", weight: 0.45 }, { type: "purchase_intent", weight: 0.35 }, { type: "social_graph", weight: 0.1 }, { type: "location", weight: 0.1 }],
+  },
+  // Midjourney: ~$500M ARR, ~20M users. Subscription only ($10-60/mo).
+  // Trains on user prompts + generated images. No ads.
+  // Data value: creative intent signals, prompt patterns. Tier 3.
+  // Source: Sacra, DemandSage
+  {
+    id: "midjourney", name: "Midjourney", category: "ai", logo: "/logos/midjourney.svg",
+    arpu: { na: 6.0, eu: 3.0, apac: 0.8, latam: 0.4, mena: 0.3, row: 0.2 },
+    dataTypes: [{ type: "browsing", weight: 0.5 }, { type: "purchase_intent", weight: 0.3 }, { type: "social_graph", weight: 0.05 }, { type: "location", weight: 0.15 }],
   },
 ];

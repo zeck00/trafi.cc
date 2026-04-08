@@ -52,11 +52,12 @@ const dataTypeLabels: Record<DataType, string> = {
 // When multiple platforms from the same family are selected,
 // their combined value is capped at the parent's total ARPU.
 const platformFamilies: Record<string, string[]> = {
-  meta: ["facebook", "instagram", "whatsapp", "messenger", "threads"],
-  alphabet: ["google", "youtube"],
+  meta: ["facebook", "instagram", "whatsapp", "messenger", "threads", "metaai"],
+  alphabet: ["google", "youtube", "gemini"],
   amazon_family: ["amazon", "primevideo", "twitch"],
   match: ["tinder", "hinge"],
   paypal_family: ["paypal", "venmo"],
+  xai: ["grok"], // shares X/Twitter data but separate company
 };
 
 // The base ARPU represents what the PLATFORM earns per user.

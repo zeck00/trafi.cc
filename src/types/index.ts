@@ -7,7 +7,8 @@ export type PlatformCategory =
   | "delivery"
   | "dating"
   | "finance"
-  | "health";
+  | "health"
+  | "ai";
 
 export interface RegionalARPU {
   na: number;

@@ -7,6 +7,7 @@ import { useTheme } from "@/hooks/useTheme";
 const DARK_INVERT = new Set([
   "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton",
   "hinge", "disney", "shein",
+  "chatgpt", "claude", "perplexity", "grok", "midjourney",
 ]);
 
 const DARK_VARIANTS: Record<string, string> = {
