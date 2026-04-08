@@ -106,7 +106,8 @@ export function StepPlatforms() {
                 </button>
               </div>
               <motion.div
-                className="flex flex-wrap gap-2"
+                className="grid gap-2"
+                style={{ gridTemplateColumns: "repeat(auto-fill, minmax(72px, 1fr))" }}
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"
