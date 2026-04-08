@@ -4,8 +4,14 @@ import { motion } from "framer-motion";
 import clsx from "clsx";
 import type { Platform } from "@/types";
 
-const DARK_INVERT_IDS = new Set([
-  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "shein",
+// Pure black SVGs → invert to white in dark mode
+const DARK_INVERT = new Set([
+  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "hinge",
+]);
+
+// Dark multicolor logos → white glow so dark parts stay visible
+const DARK_GLOW = new Set([
+  "amazon", "disney", "shein",
 ]);
 
 interface PlatformChipProps {
@@ -15,7 +21,11 @@ interface PlatformChipProps {
 }
 
 export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps) {
-  const needsInvert = DARK_INVERT_IDS.has(platform.id);
+  const logoClass = DARK_INVERT.has(platform.id)
+    ? "logo-invert"
+    : DARK_GLOW.has(platform.id)
+      ? "logo-glow"
+      : undefined;
 
   return (
     <motion.button
@@ -39,7 +49,7 @@ export function PlatformChip({ platform, selected, onToggle }: PlatformChipProps
         <img
           src={platform.logo}
           alt={platform.name}
-          className={clsx("max-w-[28px] max-h-[28px] lg:max-w-[32px] lg:max-h-[32px] object-contain", needsInvert && "logo-invert")}
+          className={clsx("max-w-[28px] max-h-[28px] lg:max-w-[32px] lg:max-h-[32px] object-contain", logoClass)}
           loading="lazy"
         />
       </div>

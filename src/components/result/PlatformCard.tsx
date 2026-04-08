@@ -3,17 +3,27 @@
 import clsx from "clsx";
 import type { PlatformResult } from "@/types";
 
-const DARK_INVERT_IDS = new Set([
-  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "shein",
+const DARK_INVERT = new Set([
+  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton", "hinge",
+]);
+
+const DARK_GLOW = new Set([
+  "amazon", "disney", "shein",
 ]);
 
 export function PlatformCard({ platform, annualValue, proportion }: PlatformResult) {
+  const logoClass = DARK_INVERT.has(platform.id)
+    ? "logo-invert"
+    : DARK_GLOW.has(platform.id)
+      ? "logo-glow"
+      : undefined;
+
   return (
     <div className="bg-surface rounded-xl p-4 border border-border flex items-center gap-4">
       <img
         src={platform.logo}
         alt={platform.name}
-        className={clsx("w-8 h-8 object-contain shrink-0", DARK_INVERT_IDS.has(platform.id) && "logo-invert")}
+        className={clsx("w-8 h-8 object-contain shrink-0", logoClass)}
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">

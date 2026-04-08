@@ -350,7 +350,7 @@ export const platforms: Platform[] = [
   },
   // Hinge: Part of Match Group. Fastest-growing brand. Tier 3 estimate.
   {
-    id: "hinge", name: "Hinge", category: "dating", logo: "/logos/hinge.png",
+    id: "hinge", name: "Hinge", category: "dating", logo: "/logos/hinge.svg",
     arpu: { na: 8.0, eu: 4.0, apac: 1.0, latam: 0.6, mena: 0.8, row: 0.4 },
     dataTypes: [{ type: "location", weight: 0.35 }, { type: "social_graph", weight: 0.3 }, { type: "browsing", weight: 0.2 }, { type: "purchase_intent", weight: 0.15 }],
   },
