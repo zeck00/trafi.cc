@@ -1,0 +1,89 @@
+# trafi.cc — Complete Reference for LLMs
+
+## Overview
+trafi.cc ("You ARE traffic") is a free web calculator that estimates the annual advertising value of a user's personal data across 50+ digital platforms. All estimates are derived from publicly available financial data — SEC filings, earnings reports, and industry benchmarks.
+
+## Platform Coverage (50 platforms)
+
+### Social (12)
+Facebook, Instagram, TikTok, YouTube, X/Twitter, Snapchat, LinkedIn, Reddit, Pinterest, Threads, Twitch, BeReal
+
+### Messaging (6)
+WhatsApp, Telegram, Discord, WeChat, LINE, Messenger
+
+### Shopping (9)
+Amazon, Temu, Shein, eBay, AliExpress, Etsy, Mercado Libre, Flipkart, Noon
+
+### Streaming (5)
+Netflix, Spotify, Disney+, Apple Music, Prime Video
+
+### Productivity (4)
+Google, Microsoft 365, Notion, Slack
+
+### Delivery & Ride-hail (7)
+Uber, DoorDash, Grab, Rappi, Instacart, Deliveroo, Talabat
+
+### Dating (3)
+Tinder, Bumble, Hinge
+
+### Finance (5)
+PayPal, Venmo, Cash App, Revolut, Wise
+
+### Health & Fitness (3)
+Strava, MyFitnessPal, Peloton
+
+## ARPU Data (FY2024, Annual, USD)
+
+### Tier 1 — Directly Reported in SEC Filings
+- Meta (Facebook + Instagram combined): US&CA $268, EU $78, APAC $19, ROW $14
+- Snapchat: NA $28.41, EU $10.07, ROW $3.68
+- Pinterest: US&CA $27.00, EU $5.88, ROW $0.84
+- Reddit: Global $11.20 (no regional breakdown)
+- Spotify (ad tier): ~$5.30/yr globally (derived from €2B ad revenue / 412M free MAUs)
+- Match Group (Tinder): RPP ~$16/month for paying users
+
+### Tier 2 — Derived from Public Financials
+- Google: $95 NA (from $264.6B ad revenue / ~4.4B users)
+- YouTube: $43 NA (from $36.1B ad revenue / ~2.5B users)
+- Amazon: $109 NA (from $56.2B ad revenue / ~310M customers)
+- TikTok: $82 NA (estimated from ~$14B US ad revenue / ~170M US users)
+
+## Demographic Multipliers
+- Age: 13-17 (0.5x), 18-24 (0.85x), 25-34 (1.0x baseline), 35-44 (1.2x), 45-54 (1.3x), 55-64 (1.1x), 65+ (0.8x)
+- Device: iOS (1.3x), Android (0.8x), Desktop (1.0x)
+- Interests: Luxury (1.6x), Investing (1.5x), Travel (1.4x), Automotive (1.3x), Tech (1.2x), Parenting (1.15x), Fashion (1.15x), Gaming (1.1x), Beauty (1.1x), Fitness/Home/Pets/Sports/Food (0.95-1.05x)
+
+## Data Type Breakdown
+Each platform's value is split across four data categories:
+- Location data (GPS, IP geolocation)
+- Browsing habits (content consumption, search queries)
+- Purchase intent (shopping behavior, wishlists, cart data)
+- Social graph (connections, interactions, demographics)
+
+## Regional Coverage
+6 regions with 75+ countries: North America, Europe, Asia-Pacific, Latin America, Middle East & North Africa, Rest of World (Sub-Saharan Africa)
+
+## Privacy
+- Zero backend — all calculations run in the browser
+- No data transmitted, stored, or logged
+- No cookies, no tracking, no analytics
+- No signup required
+
+## Source Documents
+1. Meta Q4 2024 Earnings (investor.fb.com)
+2. Snap Q4 2024 Earnings (investor.snap.com)
+3. Pinterest Q4 2024 Earnings (investor.pinterestinc.com)
+4. Reddit FY2024 Earnings (investor.redditinc.com)
+5. Spotify FY2024 Earnings (investors.spotify.com)
+6. Alphabet FY2024 10-K (abc.xyz/investor)
+7. Amazon FY2024 10-K (ir.aboutamazon.com)
+8. Uber FY2024 10-K (investor.uber.com)
+9. Match Group FY2024 10-K (ir.matchgroup.com)
+10. eMarketer Global Digital Ad CPM Benchmarks 2024
+11. IAB Internet Advertising Revenue Report 2024
+12. Tenjin/Liftoff Mobile Ad Benchmarks 2024
+13. WordStream Facebook Ads Industry Benchmarks 2024
+14. FTC Data Brokers Report
+15. Statista Digital Advertising Worldwide 2024
+16. eBay FY2024 10-K
+17. Mercado Libre FY2024 20-F

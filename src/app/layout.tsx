@@ -20,24 +20,135 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "700"],
 });
 
+const SITE_URL = "https://trafi.cc";
+const SITE_NAME = "trafi.cc";
+const SITE_TITLE = "trafi.cc — You ARE traffic | See What Your Data Is Worth";
+const SITE_DESCRIPTION =
+  "Find out how much your personal data is worth to Google, Meta, TikTok, and 50+ platforms. Based on real SEC filings and published ARPU rates. Free, private, no signup.";
+
 export const metadata: Metadata = {
-  title: "trafi.cc — You ARE traffic",
-  description:
-    "See how much you're worth to Google, Meta, TikTok, and data brokers — based on real published CPM rates. Generate your shareable digital price tag.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s | trafi.cc",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "how much is my data worth",
+    "data value calculator",
+    "digital price tag",
+    "personal data worth",
+    "ARPU calculator",
+    "data privacy",
+    "ad revenue per user",
+    "how much do advertisers pay for my data",
+    "Facebook data value",
+    "Google data worth",
+    "TikTok data value",
+    "data broker pricing",
+    "CPM rates",
+    "digital advertising value",
+    "privacy tool",
+    "you are the product",
+  ],
+  authors: [{ name: "Ziad", url: "https://ziad.us" }],
+  creator: "Ziad",
+  publisher: SITE_NAME,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/favicon.svg",
+    apple: "/favicon.svg",
   },
   openGraph: {
-    title: "trafi.cc — You ARE traffic",
-    description:
-      "See how much your data is worth to advertisers. Based on real published CPM rates.",
-    siteName: "trafi.cc",
     type: "website",
+    locale: "en_US",
+    url: SITE_URL,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "trafi.cc — See what your data is worth to advertisers",
+        type: "image/png",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+    creator: "@zeck00",
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
+  category: "technology",
 };
 
 // Inline script to prevent FOUC — runs before React hydration
 const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})()`;
+
+// Organization + WebApplication JSON-LD
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/favicon.svg`,
+      sameAs: [
+        "https://github.com/zeck00/trafi.cc",
+        "https://ziad.us",
+      ],
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#app`,
+      name: "Digital Price Tag Calculator",
+      url: SITE_URL,
+      applicationCategory: "UtilityApplication",
+      operatingSystem: "Any",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      description: SITE_DESCRIPTION,
+      browserRequirements: "Requires JavaScript",
+      softwareVersion: "1.0",
+      author: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -51,7 +162,13 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3B82F6" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

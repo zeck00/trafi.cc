@@ -4,15 +4,35 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export const metadata: Metadata = {
-  title: "How We Calculate Your Digital Price Tag | trafi.cc",
+  title: "How We Calculate Your Digital Price Tag — Methodology & Sources",
   description:
-    "We calculate your digital ad value using published ARPU data from Meta, Google, TikTok, and 40+ platforms. Full methodology and sources.",
+    "We calculate your digital ad value using published ARPU data from SEC filings (Meta 10-K, Snap 10-K, Pinterest 10-K) and industry CPM benchmarks. Full methodology, 17 cited sources, and data confidence tiers.",
+  keywords: [
+    "data value methodology",
+    "ARPU by platform",
+    "how much is my data worth calculation",
+    "Meta ARPU 2024",
+    "Facebook revenue per user",
+    "digital advertising ARPU",
+    "data broker pricing methodology",
+    "CPM benchmarks by industry",
+  ],
   openGraph: {
-    title: "How Much Is Your Data Worth? Methodology & Sources",
+    title: "How Much Is Your Data Worth? Methodology & Sources | trafi.cc",
     description:
-      "Published ARPU data from Meta, Google, TikTok, and 40+ platforms — see how we calculate your digital price tag.",
+      "Every number backed by SEC filings and industry reports. 17 cited sources with data confidence tiers.",
     siteName: "trafi.cc",
     type: "article",
+    url: "https://trafi.cc/methodology",
+  },
+  twitter: {
+    card: "summary",
+    title: "How We Calculate Your Digital Price Tag | trafi.cc",
+    description:
+      "ARPU data from Meta, Snap, Pinterest, Reddit SEC filings + industry CPM benchmarks. Full methodology.",
+  },
+  alternates: {
+    canonical: "https://trafi.cc/methodology",
   },
 };
 

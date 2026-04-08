@@ -1,0 +1,38 @@
+# trafi.cc — You ARE traffic
+
+## What is trafi.cc?
+trafi.cc is a free, privacy-first web tool that calculates how much a user's personal data is worth to advertisers. It uses real, publicly reported ARPU (Average Revenue Per User) data from SEC filings and industry reports to generate a personalized "digital price tag."
+
+## How it works
+1. Users select which platforms they use (50+ platforms across 9 categories)
+2. They enter basic demographics (age range, country, primary device)
+3. They select interest categories
+4. The calculator produces a per-platform breakdown showing annual data value
+
+## Data sources
+- **Tier 1 (SEC filings):** Meta 10-K (ARPP), Snap 10-K (ARPU), Pinterest 10-K (ARPU), Reddit earnings (ARPU), Spotify earnings (ad ARPU), Match Group 10-K (RPP)
+- **Tier 2 (derived):** Google/Alphabet 10-K (ad revenue / users), Amazon 10-K (ad revenue / customers), Uber 10-K (ad revenue / MAPC)
+- **Tier 3 (industry estimates):** eMarketer CPM benchmarks, Tenjin mobile ad benchmarks, WordStream industry data
+
+## Calculation formula
+Value = Base ARPU × Age Multiplier × Device Multiplier × Interest Multiplier × 0.55 (realism factor)
+
+## Key facts
+- Typical result: $2–$50/year depending on demographics and platforms
+- 50+ platforms across Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
+- 75+ countries supported across 6 regions (NA, EU, APAC, LATAM, MENA, ROW)
+- All calculations run client-side — no data is stored or transmitted
+- Generates a shareable "price tag" sticker image
+
+## URLs
+- Calculator: https://trafi.cc
+- Methodology & sources: https://trafi.cc/methodology
+- GitHub: https://github.com/zeck00/trafi.cc
+
+## Creator
+Built by Ziad (https://ziad.us)
+
+## Technical
+- Next.js 15 static site (no backend)
+- Deployed on Vercel
+- Open source (MIT license)
