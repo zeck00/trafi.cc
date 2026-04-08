@@ -4,7 +4,7 @@
 
 ### **You ARE traffic.**
 
-See how much your personal data is worth to Google, Meta, TikTok, and 40+ platforms — based on real published CPM & ARPU rates.
+See how much your personal data is worth to Google, Meta, TikTok, and 60+ platforms — based on real published CPM & ARPU rates.
 
 **[🌐 Try it live](https://trafi.cc)** · **[📖 Methodology](https://trafi.cc/methodology)** · **[☕ Support me](https://pay.ziina.com/zeq0)**
 
@@ -14,7 +14,7 @@ See how much your personal data is worth to Google, Meta, TikTok, and 40+ platfo
 
 ## ✨ What is this?
 
-People have no idea how much their data is worth to advertisers. The answer is shockingly low — **$2–50/year** depending on who you are and where you live.
+People have no idea how much their data is worth to advertisers. The answer is shockingly low — **$5–200/year** depending on who you are and where you live.
 
 **trafi.cc** turns publicly available ad industry data into a personalized, shareable **digital price tag** that tells you exactly what you're worth.
 
@@ -33,7 +33,7 @@ Every number is calculated from **real ARPU data** pulled from SEC filings (Meta
 
 ## 🖼️ Features
 
-- 🌍 **50 platforms** across Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
+- 🌍 **60+ platforms** across AI, Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
 - 🔍 **Search & bulk select** — find platforms fast, select entire categories
 - 💰 **Per-platform breakdown** — see exactly which app profits most from you
 - 📊 **Data type analysis** — location, browsing, purchase intent, social graph
@@ -86,14 +86,16 @@ src/
 The calculator uses this formula:
 
 ```
-Your Value = Base ARPU × Age Multiplier × Device Multiplier × Interest Multiplier × 0.55
+Your Value = Platform ARPU × Age × Device × Interest × 0.20
 ```
 
-- **Base ARPU** — from platform earnings reports, by region (NA, EU, APAC, LATAM, MENA, ROW)
-- **Age** — 25-34 year olds are worth ~30% more; teens ~40% less
-- **Device** — iOS users command ~20% higher CPMs than Android
+- **Platform ARPU** — from SEC filings and earnings reports, by region (NA, EU, APAC, LATAM, MENA, ROW)
+- **Age** — 35-54 year olds are most valuable (1.15-1.2x); teens ~50% less due to COPPA
+- **Device** — iOS users command 2-3x higher CPMs, normalized to 1.2x/0.85x
 - **Interests** — luxury (1.6x) and investing (1.5x) are the most valuable verticals
-- **0.55x** — realism factor for varying engagement levels
+- **0.20x** — data value fraction (your data is ~20% of what makes the ad system work)
+- **1.8x cap** — combined demographic multiplier is capped to prevent unrealistic compounding
+- **Family caps** — Meta, Alphabet, Amazon platforms don't double-count parent ARPU
 
 Full details with all sources at **[trafi.cc/methodology](https://trafi.cc/methodology)**
 

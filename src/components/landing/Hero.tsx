@@ -49,7 +49,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         >
-          Find out how much your data is worth to Google, Meta, TikTok, and 40+
+          Find out how much your data is worth to Google, Meta, TikTok, and 60+
           platforms — based on real published ad rates.
         </motion.p>
 
@@ -72,7 +72,7 @@ export function Hero({ onStart }: { onStart: () => void }) {
         >
           <Stat value="$5–200" label="per year" />
           <div className="w-px h-8 bg-border" />
-          <Stat value="50+" label="platforms" />
+          <Stat value="60+" label="platforms" />
           <div className="w-px h-8 bg-border" />
           <Stat value="100%" label="free" />
         </motion.div>

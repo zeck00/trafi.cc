@@ -4,7 +4,7 @@
 trafi.cc is a free, privacy-first web tool that calculates how much a user's personal data is worth to advertisers. It uses real, publicly reported ARPU (Average Revenue Per User) data from SEC filings and industry reports to generate a personalized "digital price tag."
 
 ## How it works
-1. Users select which platforms they use (50+ platforms across 9 categories)
+1. Users select which platforms they use (62 platforms across 10 categories including AI)
 2. They enter basic demographics (age range, country, primary device)
 3. They select interest categories
 4. The calculator produces a per-platform breakdown showing annual data value
@@ -18,8 +18,10 @@ trafi.cc is a free, privacy-first web tool that calculates how much a user's per
 Value = Platform ARPU × Age Multiplier × Device Multiplier × Interest Multiplier × 0.20 (data value fraction)
 
 ## Key facts
-- Typical result: $5–$150/year depending on demographics and platforms
-- 50+ platforms across Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
+- Typical result: $5–$200/year depending on demographics and platforms
+- 62 platforms across AI, Social, Messaging, Shopping, Streaming, Productivity, Delivery, Dating, Finance, Health
+- Combined demographic multiplier capped at 1.8x
+- Platform families (Meta, Alphabet, Amazon) capped at parent ARPU to prevent double-counting
 - 75+ countries supported across 6 regions (NA, EU, APAC, LATAM, MENA, ROW)
 - All calculations run client-side — no data is stored or transmitted
 - Generates a shareable "price tag" sticker image

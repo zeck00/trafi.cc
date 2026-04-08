@@ -1,9 +1,12 @@
 # trafi.cc — Complete Reference for LLMs
 
 ## Overview
-trafi.cc ("You ARE traffic") is a free web calculator that estimates the annual advertising value of a user's personal data across 50+ digital platforms. All estimates are derived from publicly available financial data — SEC filings, earnings reports, and industry benchmarks.
+trafi.cc ("You ARE traffic") is a free web calculator that estimates the annual advertising value of a user's personal data across 62 digital platforms. All estimates are derived from publicly available financial data — SEC filings, earnings reports, and industry benchmarks.
 
-## Platform Coverage (50 platforms)
+## Platform Coverage (62 platforms)
+
+### AI (8)
+ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google), Copilot (Microsoft), Perplexity, Grok (xAI), Meta AI, Midjourney
 
 ### Social (12)
 Facebook, Instagram, TikTok, YouTube, X/Twitter, Snapchat, LinkedIn, Reddit, Pinterest, Threads, Twitch, BeReal
@@ -51,8 +54,9 @@ Strava, MyFitnessPal, Peloton
 ## Demographic Multipliers
 - Data value fraction: 0.20x (your data is ~20% of platform ARPU; the rest is ad infrastructure value)
 - Platform family capping: FB+IG capped at Meta total, Google+YouTube capped at Alphabet total
-- Age: 13-17 (0.5x), 18-24 (0.85x), 25-34 (1.0x baseline), 35-44 (1.2x), 45-54 (1.3x), 55-64 (1.1x), 65+ (0.8x)
-- Device: iOS (1.3x), Android (0.8x), Desktop (1.0x)
+- Combined multiplier cap: 1.8x (prevents unrealistic compounding)
+- Age: 13-17 (0.5x), 18-24 (0.85x), 25-34 (1.0x baseline), 35-44 (1.15x), 45-54 (1.2x), 55-64 (1.05x), 65+ (0.75x)
+- Device: iOS (1.2x), Android (0.85x), Desktop (1.0x)
 - Interests: Luxury (1.6x), Investing (1.5x), Travel (1.4x), Automotive (1.3x), Tech (1.2x), Parenting (1.15x), Fashion (1.15x), Gaming (1.1x), Beauty (1.1x), Fitness/Home/Pets/Sports/Food (0.95-1.05x)
 
 ## Data Type Breakdown
