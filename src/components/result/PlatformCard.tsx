@@ -2,7 +2,6 @@
 
 import clsx from "clsx";
 import type { PlatformResult } from "@/types";
-import { useTheme } from "@/hooks/useTheme";
 
 const DARK_INVERT = new Set([
   "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton",
@@ -10,27 +9,21 @@ const DARK_INVERT = new Set([
   "chatgpt", "claude", "perplexity", "grok", "midjourney",
 ]);
 
-const DARK_VARIANTS: Record<string, string> = {
-  amazon: "/logos/amazon-dark.svg",
-};
+const DARK_GLOW = new Set(["amazon"]);
 
 export function PlatformCard({ platform, annualValue, proportion }: PlatformResult) {
-  const { resolved } = useTheme();
-  const isDark = resolved === "dark";
-
-  const logoSrc =
-    isDark && DARK_VARIANTS[platform.id]
-      ? DARK_VARIANTS[platform.id]
-      : platform.logo;
-
-  const needsInvert = isDark && DARK_INVERT.has(platform.id);
+  const darkClass = DARK_INVERT.has(platform.id)
+    ? "logo-invert"
+    : DARK_GLOW.has(platform.id)
+      ? "logo-glow"
+      : undefined;
 
   return (
     <div className="bg-surface rounded-xl p-4 border border-border flex items-center gap-4">
       <img
-        src={logoSrc}
+        src={platform.logo}
         alt={platform.name}
-        className={clsx("w-8 h-8 object-contain shrink-0", needsInvert && "logo-invert")}
+        className={clsx("w-8 h-8 object-contain shrink-0", darkClass)}
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">
