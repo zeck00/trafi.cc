@@ -36,6 +36,7 @@ yarn-error.log*
 # local dev context
 /memory
 /.claude
+/marketing
 
 # vercel
 .vercel
