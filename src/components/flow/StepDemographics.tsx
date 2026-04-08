@@ -1,11 +1,13 @@
 "use client";
 
+import { useMemo } from "react";
 import { useFlowState, useFlowDispatch } from "@/hooks/useFlowState";
 import { DeviceToggle } from "@/components/ui/DeviceToggle";
+import { Dropdown } from "@/components/ui/Dropdown";
 import { countries } from "@/data/countries";
 import type { AgeRange } from "@/types";
 
-const ageRanges: { value: AgeRange; label: string }[] = [
+const ageOptions = [
   { value: "13-17", label: "13–17" },
   { value: "18-24", label: "18–24" },
   { value: "25-34", label: "25–34" },
@@ -18,6 +20,15 @@ const ageRanges: { value: AgeRange; label: string }[] = [
 export function StepDemographics() {
   const { ageRange, country, device } = useFlowState();
   const dispatch = useFlowDispatch();
+
+  const countryOptions = useMemo(
+    () =>
+      countries.map((c) => ({
+        value: c.code,
+        label: `${c.flag}  ${c.name}`,
+      })),
+    []
+  );
 
   return (
     <div className="space-y-6">
@@ -33,44 +44,27 @@ export function StepDemographics() {
           <label className="block text-sm font-medium text-text-muted mb-1.5">
             Age Range
           </label>
-          <select
-            value={ageRange ?? ""}
-            onChange={(e) =>
-              dispatch({ type: "SET_AGE", age: e.target.value as AgeRange })
+          <Dropdown
+            options={ageOptions}
+            value={ageRange}
+            onChange={(v) =>
+              dispatch({ type: "SET_AGE", age: v as AgeRange })
             }
-            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text-primary focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer"
-          >
-            <option value="" disabled>
-              Select age range
-            </option>
-            {ageRanges.map((a) => (
-              <option key={a.value} value={a.value}>
-                {a.label}
-              </option>
-            ))}
-          </select>
+            placeholder="Select age range"
+          />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-text-muted mb-1.5">
             Country
           </label>
-          <select
-            value={country ?? ""}
-            onChange={(e) =>
-              dispatch({ type: "SET_COUNTRY", country: e.target.value })
-            }
-            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-text-primary focus:ring-2 focus:ring-primary focus:outline-none appearance-none cursor-pointer"
-          >
-            <option value="" disabled>
-              Select country
-            </option>
-            {countries.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.flag} {c.name}
-              </option>
-            ))}
-          </select>
+          <Dropdown
+            options={countryOptions}
+            value={country}
+            onChange={(v) => dispatch({ type: "SET_COUNTRY", country: v })}
+            placeholder="Select country"
+            searchable
+          />
         </div>
 
         <div>
