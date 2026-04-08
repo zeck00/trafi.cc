@@ -4,31 +4,28 @@ import type {
   DataType,
   DataTypeResult,
   CountryComparisonEntry,
+  Platform,
 } from "@/types";
 import { platforms } from "@/data/platforms";
 import { getCountry, referenceCountries, type Region } from "@/data/countries";
 import { interestMultipliers } from "@/data/interests";
 
 // Source: WordStream/Revealbot industry CPM benchmarks, advertiser bid data.
-// 35-54 is the most valuable demographic (highest purchasing power + digital engagement).
-// Teens are restricted by COPPA/regulations. Tier 3 estimates.
 const ageMultipliers: Record<string, number> = {
-  "13-17": 0.5,    // COPPA restrictions, limited ad targeting
-  "18-24": 0.85,   // High engagement, lower purchasing power
-  "25-34": 1.0,    // Baseline
-  "35-44": 1.2,    // Peak purchasing power + engagement
-  "45-54": 1.3,    // Highest purchasing power
-  "55-64": 1.1,    // High income, declining digital engagement
-  "65+": 0.8,      // Lower digital engagement + ad spend targeting
+  "13-17": 0.5,
+  "18-24": 0.85,
+  "25-34": 1.0,
+  "35-44": 1.15,
+  "45-54": 1.2,
+  "55-64": 1.05,
+  "65+": 0.75,
 };
 
 // Source: Tenjin/Liftoff mobile benchmarks 2024.
-// iOS CPMs are 2-3x higher than Android (higher purchasing power + ATT scarcity).
-// Desktop falls between the two. Tier 3 estimates.
 const deviceMultipliers: Record<string, number> = {
-  ios: 1.3,       // 2-3x Android CPMs → normalized multiplier
-  android: 0.8,   // Lower CPMs globally
-  desktop: 1.0,   // Baseline
+  ios: 1.2,
+  android: 0.85,
+  desktop: 1.0,
 };
 
 const ageMidpoints: Record<string, number> = {
@@ -48,24 +45,25 @@ const dataTypeLabels: Record<DataType, string> = {
   social_graph: "Social Graph",
 };
 
-// Platform families — these share the same parent ARPU pool.
-// When multiple platforms from the same family are selected,
-// their combined value is capped at the parent's total ARPU.
-const platformFamilies: Record<string, string[]> = {
-  meta: ["facebook", "instagram", "whatsapp", "messenger", "threads", "metaai"],
-  alphabet: ["google", "youtube", "gemini"],
-  amazon_family: ["amazon", "primevideo", "twitch"],
-  match: ["tinder", "hinge"],
-  paypal_family: ["paypal", "venmo"],
-  xai: ["grok"], // shares X/Twitter data but separate company
+// Platform families — share the same parent revenue pool.
+// Family ARPU caps (NA, annual) based on parent company reported ARPU.
+// Cap = 20% of parent ARPU (data value fraction).
+const platformFamilies: Record<string, { members: string[]; naARPU: number }> = {
+  meta:          { members: ["facebook", "instagram", "whatsapp", "messenger", "threads", "metaai"], naARPU: 268 },
+  alphabet:      { members: ["google", "youtube", "gemini"], naARPU: 280 },
+  amazon_family: { members: ["amazon", "primevideo", "twitch"], naARPU: 180 },
+  match:         { members: ["tinder", "hinge"], naARPU: 18 },
+  paypal_family: { members: ["paypal", "venmo"], naARPU: 12 },
 };
 
-// The base ARPU represents what the PLATFORM earns per user.
-// Your DATA's value is a fraction of that — the platform captures most value
-// through their ad infrastructure, sales teams, and targeting algorithms.
-// Industry estimates: raw data value ≈ 20% of platform ARPU.
-// Source: Various academic papers on "value of personal data" + FTC data broker reports.
+// Your DATA's value is a fraction of platform ARPU.
+// Platform captures most value through infrastructure.
+// Source: FTC data broker reports, academic papers on "value of personal data".
 const DATA_VALUE_FRACTION = 0.20;
+
+// Cap the combined demographic multiplier to prevent extreme compounding.
+// age × device × interest should never exceed 1.8x total.
+const MAX_COMBINED_MULTIPLIER = 1.8;
 
 function countryToRegion(code: string | null): Region {
   if (!code) return "na";
@@ -82,68 +80,71 @@ function computeInterestMultiplier(selectedInterests: string[]): number {
   return Math.pow(product, 1 / selectedInterests.length);
 }
 
-function computeForRegion(
-  state: FlowState,
-  region: Region
-): number {
-  const ageMult = ageMultipliers[state.ageRange ?? "25-34"] ?? 1.0;
-  const devMult = deviceMultipliers[state.device ?? "ios"] ?? 1.0;
-  const intMult = computeInterestMultiplier(state.interests);
+function getCombinedMultiplier(age: string | null, device: string | null, interests: string[]) {
+  const ageMult = ageMultipliers[age ?? "25-34"] ?? 1.0;
+  const devMult = deviceMultipliers[device ?? "desktop"] ?? 1.0;
+  const intMult = computeInterestMultiplier(interests);
+  const combined = ageMult * devMult * intMult;
+  return Math.min(combined, MAX_COMBINED_MULTIPLIER);
+}
 
-  let total = 0;
-  for (const id of state.selectedPlatforms) {
-    const platform = platforms.find((p) => p.id === id);
-    if (!platform) continue;
-    const base = platform.arpu[region];
-    total += base * ageMult * devMult * intMult * DATA_VALUE_FRACTION;
+// Region ratio relative to NA (used for family caps in non-NA regions)
+function regionRatio(region: Region): number {
+  const ratios: Record<Region, number> = {
+    na: 1.0,
+    eu: 0.35,
+    apac: 0.08,
+    latam: 0.06,
+    mena: 0.05,
+    row: 0.03,
+  };
+  return ratios[region];
+}
+
+function applyFamilyCaps(
+  results: { platform: Platform; annualValue: number }[],
+  region: Region,
+  multiplier: number
+) {
+  const output = [...results];
+
+  for (const family of Object.values(platformFamilies)) {
+    const indices = output
+      .map((r, i) => (family.members.includes(r.platform.id) ? i : -1))
+      .filter((i) => i >= 0);
+
+    if (indices.length <= 1) continue;
+
+    const familySum = indices.reduce((s, i) => s + output[i].annualValue, 0);
+    // Family cap = parent ARPU × DATA_VALUE_FRACTION × region ratio × multiplier
+    const familyCap = family.naARPU * DATA_VALUE_FRACTION * regionRatio(region) * multiplier;
+
+    if (familySum > familyCap) {
+      const ratio = familyCap / familySum;
+      for (const i of indices) {
+        output[i] = { ...output[i], annualValue: output[i].annualValue * ratio };
+      }
+    }
   }
-  return total;
+
+  return output;
 }
 
 export function calculate(state: FlowState): CalculationResult {
   const region = countryToRegion(state.country);
-  const ageMult = ageMultipliers[state.ageRange ?? "25-34"] ?? 1.0;
-  const devMult = deviceMultipliers[state.device ?? "ios"] ?? 1.0;
-  const intMult = computeInterestMultiplier(state.interests);
+  const multiplier = getCombinedMultiplier(state.ageRange, state.device, state.interests);
 
   const rawResults = state.selectedPlatforms
     .map((id) => {
       const platform = platforms.find((p) => p.id === id);
       if (!platform) return null;
       const base = platform.arpu[region];
-      const annualValue = base * ageMult * devMult * intMult * DATA_VALUE_FRACTION;
+      const annualValue = base * multiplier * DATA_VALUE_FRACTION;
       return { platform, annualValue };
     })
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
-  // Cap platform families — selecting FB+IG shouldn't exceed Meta's total ARPP
-  // The individual platform ARPUs already represent portions of the family total,
-  // but when all are selected the sum can overshoot. Cap at family-level max.
-  const familyTotals = new Map<string, number>();
-  const familyCaps = new Map<string, number>();
-
-  for (const [family, members] of Object.entries(platformFamilies)) {
-    const selected = rawResults.filter((r) => members.includes(r.platform.id));
-    if (selected.length <= 1) continue;
-    const sum = selected.reduce((s, r) => s + r.annualValue, 0);
-    const maxMember = Math.max(...selected.map((r) => r.annualValue));
-    // Family cap: largest member × 1.3 (some additive value, but not fully stacked)
-    const cap = maxMember * 1.3;
-    if (sum > cap) {
-      familyTotals.set(family, sum);
-      familyCaps.set(family, cap);
-    }
-  }
-
-  const platformResults = rawResults.map((r) => {
-    for (const [family, members] of Object.entries(platformFamilies)) {
-      if (members.includes(r.platform.id) && familyTotals.has(family)) {
-        const ratio = familyCaps.get(family)! / familyTotals.get(family)!;
-        return { ...r, annualValue: r.annualValue * ratio };
-      }
-    }
-    return r;
-  });
+  const platformResults = applyFamilyCaps(rawResults, region, multiplier);
 
   const totalAnnual = platformResults.reduce(
     (sum, p) => sum + p.annualValue,
@@ -182,7 +183,7 @@ export function calculate(state: FlowState): CalculationResult {
     }))
     .sort((a, b) => b.percentage - a.percentage);
 
-  // Country comparison
+  // Country comparison — uses same family caps
   const userCountryCode = state.country ?? "US";
   const comparisonCodes = [
     ...new Set([userCountryCode, ...referenceCountries]),
@@ -192,7 +193,20 @@ export function calculate(state: FlowState): CalculationResult {
     (code) => {
       const c = getCountry(code);
       const r = c?.region ?? "na";
-      const value = computeForRegion(state, r);
+      const compMult = getCombinedMultiplier(state.ageRange, state.device, state.interests);
+
+      const compRaw = state.selectedPlatforms
+        .map((id) => {
+          const platform = platforms.find((p) => p.id === id);
+          if (!platform) return null;
+          const base = platform.arpu[r];
+          return { platform, annualValue: base * compMult * DATA_VALUE_FRACTION };
+        })
+        .filter((p): p is NonNullable<typeof p> => p !== null);
+
+      const capped = applyFamilyCaps(compRaw, r, compMult);
+      const value = capped.reduce((s, p) => s + p.annualValue, 0);
+
       return {
         country: c?.name ?? code,
         flag: c?.flag ?? "🌍",
