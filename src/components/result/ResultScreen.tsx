@@ -20,7 +20,7 @@ export function ResultScreen({ result, onReset }: ResultScreenProps) {
     <div className="min-h-dvh">
       <TotalReveal total={result.totalAnnual} />
 
-      <div className="max-w-lg mx-auto w-full px-5 space-y-16 pb-20">
+      <div className="max-w-lg lg:max-w-2xl mx-auto w-full px-5 space-y-16 pb-20">
         <PlatformGrid platforms={result.platforms} />
         <DataTypeBreakdown data={result.dataTypeBreakdown} />
         <CountryComparison data={result.countryComparison} />

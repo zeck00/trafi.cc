@@ -70,7 +70,7 @@ function FlowContent() {
         <ThemeToggle />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-5 py-8 max-w-lg mx-auto w-full">
+      <div className="flex-1 flex flex-col justify-center px-5 py-8 max-w-lg lg:max-w-2xl mx-auto w-full">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={state.step}

@@ -106,7 +106,7 @@ export function StepPlatforms() {
                 </button>
               </div>
               <motion.div
-                className="grid grid-cols-4 sm:grid-cols-5 gap-2"
+                className="flex flex-wrap gap-2"
                 variants={staggerContainer}
                 initial="hidden"
                 animate="visible"

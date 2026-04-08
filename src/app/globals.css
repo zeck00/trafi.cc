@@ -48,6 +48,11 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Invert black SVG logos in dark mode so they're visible */
+.dark .logo-invert {
+  filter: invert(1);
+}
+
 /* Hide scrollbar but keep scroll */
 .no-scrollbar {
   scrollbar-width: none;

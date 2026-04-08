@@ -1,13 +1,20 @@
 "use client";
 
+import clsx from "clsx";
 import type { PlatformResult } from "@/types";
+
+const DARK_INVERT_IDS = new Set([
+  "x", "tiktok", "threads", "notion", "uber", "bereal", "peloton",
+]);
 
 export function PlatformCard({ platform, annualValue, proportion }: PlatformResult) {
   return (
     <div className="bg-surface rounded-xl p-4 border border-border flex items-center gap-4">
-      <div className="w-8 h-8 flex items-center justify-center text-xl shrink-0">
-        {platform.logo}
-      </div>
+      <img
+        src={platform.logo}
+        alt={platform.name}
+        className={clsx("w-8 h-8 object-contain shrink-0", DARK_INVERT_IDS.has(platform.id) && "logo-invert")}
+      />
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">
           <span className="text-sm font-medium text-text-primary truncate">
