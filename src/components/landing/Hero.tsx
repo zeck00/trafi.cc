@@ -74,15 +74,15 @@ export function Hero({ onStart }: { onStart: () => void }) {
 
       {/* Footer */}
       <motion.div
-        className="pb-5 text-xs text-text-muted text-center whitespace-nowrap"
+        className="pb-5 text-xs text-text-muted text-center whitespace-nowrap flex items-center justify-center gap-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
         <a href="https://ziad.us" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">About</a>
-        {" · "}
+        <span className="opacity-30">·</span>
         <a href="https://pay.ziina.com/zeq0" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Support</a>
-        {" · "}
+        <span className="opacity-30">·</span>
         <a href="https://github.com/zeck00/trafi.cc" target="_blank" rel="noopener noreferrer" className="hover:text-text-primary transition-colors">GitHub</a>
       </motion.div>
     </div>
