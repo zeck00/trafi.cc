@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { sources } from "@/data/sources";
 import Link from "next/link";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { NavBar } from "@/components/layout/NavBar";
 
 export const metadata: Metadata = {
   title: "How We Calculate Your Digital Price Tag — Methodology & Sources",
@@ -43,32 +43,6 @@ const tierLabels: Record<number, { label: string; color: string }> = {
 };
 
 export default function MethodologyPage() {
-  const faqItems = [
-    {
-      q: "How much is my data worth to Facebook?",
-      a: "Meta reported annual revenue per person (ARPP) of $268 for US & Canada users in their FY2024 10-K filing. Facebook generates roughly 60% of Meta's ad revenue, putting the per-user Facebook value at ~$160/year for a US user before demographic adjustments.",
-    },
-    {
-      q: "Why is my data worth so little?",
-      a: "Individual data points are cheap — it's the aggregate that's valuable. Advertisers pay for access to millions of users matching specific criteria. Your share of that is small, but across billions of users, it generates hundreds of billions in revenue for platforms.",
-    },
-    {
-      q: "Do platforms actually sell my data?",
-      a: "Most major platforms (Meta, Google, TikTok) don't sell your data directly. Instead, they sell advertisers the ability to target you based on your data. The economic effect is similar — your behavioral data has a measurable dollar value to their business model.",
-    },
-    {
-      q: "How accurate is this calculator?",
-      a: "It depends on the platform. For Meta, Snap, Pinterest, and Reddit, we use directly reported ARPU from SEC filings (Tier 1). For Google and Amazon, we derive values from reported revenue and user counts (Tier 2). For private companies like TikTok and smaller platforms, we use industry estimates (Tier 3). We apply a 0.55x realism factor because not every user generates the full platform ARPU.",
-    },
-    {
-      q: "What's the difference between the data tiers?",
-      a: "Tier 1 means the platform directly reports ARPU in SEC filings — these are audited numbers. Tier 2 means we calculated ARPU by dividing the platform's reported revenue by its reported user count — both figures are public but the division is ours. Tier 3 means we estimated from analyst reports, press coverage, or industry benchmarks — these are directionally reliable but not audited.",
-    },
-    {
-      q: "Why is iOS worth more than Android?",
-      a: "iOS CPMs are consistently 2-3x higher than Android, according to mobile ad benchmarks from Tenjin and Liftoff. This is because iOS users tend to have higher purchasing power, and Apple's App Tracking Transparency (ATT) framework constrains ad supply, pushing prices up.",
-    },
-  ];
 
   const tier1Sources = sources.filter((s) => s.tier === 1);
   const tier2Sources = sources.filter((s) => s.tier === 2);
@@ -76,15 +50,7 @@ export default function MethodologyPage() {
 
   return (
     <div className="min-h-dvh bg-background text-text-primary">
-      <header className="flex items-center justify-between px-5 py-4 border-b border-border">
-        <Link
-          href="/"
-          className="text-sm font-medium font-[family-name:var(--font-heading)] text-text-muted hover:text-text-primary transition-colors"
-        >
-          ← Back to calculator
-        </Link>
-        <ThemeToggle />
-      </header>
+      <NavBar />
 
       <main className="max-w-2xl mx-auto px-5 py-12">
         <h1 className="text-4xl font-bold font-[family-name:var(--font-heading)] mb-4">
@@ -231,57 +197,22 @@ export default function MethodologyPage() {
           ))}
         </section>
 
-        {/* FAQ */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold font-[family-name:var(--font-heading)] mb-4">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-6">
-            {faqItems.map((item, i) => (
-              <div key={i}>
-                <h3 className="font-medium text-text-primary mb-1">
-                  {item.q}
-                </h3>
-                <p className="text-sm text-text-muted leading-relaxed">
-                  {item.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="text-center py-8 border-t border-border">
-          <p className="text-text-muted mb-4">
-            Ready to find out your digital price tag?
-          </p>
+        {/* Links */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-4 pt-8 border-t border-border">
+          <Link
+            href="/faq"
+            className="flex-1 text-center px-6 py-3 rounded-lg border border-border text-sm font-medium text-text-muted hover:text-text-primary hover:border-text-muted/30 transition-colors"
+          >
+            Read the FAQ
+          </Link>
           <Link
             href="/"
-            className="inline-block px-8 py-3 rounded-full bg-accent text-white font-medium text-sm hover:brightness-110 transition-all"
+            className="flex-1 text-center px-6 py-3 rounded-full bg-accent text-white text-sm font-medium hover:brightness-110 transition-all"
           >
-            Calculate My Worth
+            Calculate my worth
           </Link>
-        </section>
+        </div>
       </main>
-
-      {/* JSON-LD structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqItems.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: item.a,
-              },
-            })),
-          }),
-        }}
-      />
     </div>
   );
 }

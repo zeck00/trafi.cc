@@ -17,7 +17,13 @@ export function Hero({ onStart }: { onStart: () => void }) {
             href="/methodology"
             className="text-xs text-text-muted hover:text-text-primary transition-colors"
           >
-            How it works
+            Methodology
+          </Link>
+          <Link
+            href="/faq"
+            className="text-xs text-text-muted hover:text-text-primary transition-colors"
+          >
+            FAQ
           </Link>
           <ThemeToggle />
         </div>
