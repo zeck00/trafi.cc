@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 # Batch inspect every URL in the live sitemap and report indexing status.
-# Usage: ./scripts/gsc-indexing-report.sh
-# Note: URL Inspection API has a ~2000/day quota per site — we have ~72 URLs, plenty of headroom.
+# Usage: ./scripts/gsc-indexing-report.sh [sitemap-url]
+# Note: URL Inspection API has a ~2000/day quota per site.
 set -euo pipefail
 cd "$(dirname "$0")"
 source ./gsc-common.sh
 
+SITEMAP_URL="${1:-https://trafi.cc/sitemap.xml}"
+
 echo "==> Fetching live sitemap to get the URL list"
-URLS=$(curl -s https://trafi.cc/sitemap.xml | grep -oE '<loc>[^<]+</loc>' | sed -e 's|<loc>||' -e 's|</loc>||')
+URLS=$(curl -s "$SITEMAP_URL" | grep -oE '<loc>[^<]+</loc>' | sed -e 's|<loc>||' -e 's|</loc>||')
 N=$(echo "$URLS" | wc -l | tr -d ' ')
 echo "  Found $N URLs"
 echo ""
 
-declare -A COUNTS
-COUNTS[PASS]=0
-COUNTS[PARTIAL]=0
-COUNTS[FAIL]=0
-COUNTS[NEUTRAL]=0
+# Use plain vars instead of associative arrays (macOS bash 3.2 compatible)
+COUNT_PASS=0
+COUNT_PARTIAL=0
+COUNT_FAIL=0
+COUNT_NEUTRAL=0
 
 NOT_INDEXED=()
 i=0
@@ -37,7 +39,13 @@ while IFS= read -r URL; do
     exit 1
   fi
 
-  COUNTS[$VERDICT]=$((${COUNTS[$VERDICT]:-0}+1))
+  case "$VERDICT" in
+    PASS) COUNT_PASS=$((COUNT_PASS+1)) ;;
+    PARTIAL) COUNT_PARTIAL=$((COUNT_PARTIAL+1)) ;;
+    FAIL) COUNT_FAIL=$((COUNT_FAIL+1)) ;;
+    NEUTRAL) COUNT_NEUTRAL=$((COUNT_NEUTRAL+1)) ;;
+  esac
+
   echo "$VERDICT  ($COVERAGE)"
 
   if [[ "$VERDICT" != "PASS" ]]; then
@@ -50,10 +58,10 @@ done <<< "$URLS"
 
 echo ""
 echo "==> Summary"
-printf "  %-10s %s\n" "PASS:"    "${COUNTS[PASS]}"
-printf "  %-10s %s\n" "PARTIAL:" "${COUNTS[PARTIAL]}"
-printf "  %-10s %s\n" "FAIL:"    "${COUNTS[FAIL]}"
-printf "  %-10s %s\n" "NEUTRAL:" "${COUNTS[NEUTRAL]}"
+printf "  %-10s %s\n" "PASS:"    "$COUNT_PASS"
+printf "  %-10s %s\n" "PARTIAL:" "$COUNT_PARTIAL"
+printf "  %-10s %s\n" "FAIL:"    "$COUNT_FAIL"
+printf "  %-10s %s\n" "NEUTRAL:" "$COUNT_NEUTRAL"
 
 if [[ ${#NOT_INDEXED[@]} -gt 0 ]]; then
   echo ""

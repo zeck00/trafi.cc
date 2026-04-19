@@ -13,7 +13,7 @@ RESPONSE=$(gsc_api "/webmasters/v3/sites/${GSC_SITE_URLENC}/sitemaps/${SITEMAP_E
 CODE=$(echo "$RESPONSE" | tail -n 1)
 BODY=$(echo "$RESPONSE" | sed '$d')
 
-if [[ "$CODE" == "200" || "$CODE" == "201" ]]; then
+if [[ "$CODE" == "200" || "$CODE" == "201" || "$CODE" == "204" ]]; then
   echo "  OK ($CODE) — submission accepted. Processing is async; check status with ./gsc-sitemaps.sh"
 else
   echo "  FAILED ($CODE)"
