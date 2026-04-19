@@ -31,16 +31,20 @@ export function Hero({ onStart }: { onStart: () => void }) {
 
       {/* Hero content */}
       <div className="flex-1 flex flex-col items-center justify-center px-5 text-center max-w-2xl mx-auto">
+        <h1 className="text-xs sm:text-sm uppercase tracking-[0.2em] text-text-muted font-medium mb-4">
+          How much is your data worth to advertisers?
+        </h1>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h1 className="text-5xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] leading-[1.1] tracking-tight">
+          <h2 className="text-5xl sm:text-7xl font-bold font-[family-name:var(--font-heading)] leading-[1.1] tracking-tight">
             You ARE
             <br />
             <span className="text-primary">traffic.</span>
-          </h1>
+          </h2>
         </motion.div>
 
         <motion.p
@@ -49,8 +53,8 @@ export function Hero({ onStart }: { onStart: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
         >
-          Find out how much your data is worth to Google, Meta, TikTok, and 60+
-          platforms — based on real published ad rates.
+          Calculate how much your personal data is worth to Google, Meta, TikTok,
+          ChatGPT, and 60+ advertisers — based on real SEC filings.
         </motion.p>
 
         <motion.button

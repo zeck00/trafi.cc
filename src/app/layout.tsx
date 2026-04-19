@@ -23,9 +23,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = "https://trafi.cc";
 const SITE_NAME = "trafi.cc";
-const SITE_TITLE = "trafi.cc — You ARE traffic | See What Your Data Is Worth";
+const SITE_TITLE = "How Much Is Your Data Worth? Free Calculator | trafi.cc";
 const SITE_DESCRIPTION =
-  "Find out how much your personal data is worth to Google, Meta, TikTok, and 60+ platforms. Based on real SEC filings and published ARPU rates. Free, private, no signup.";
+  "Calculate how much your personal data is worth to Facebook, Google, TikTok, ChatGPT, and 60+ platforms. Based on real SEC filings and published ARPU rates. Free, private, no signup.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -138,7 +138,7 @@ const jsonLd = {
     {
       "@type": "WebApplication",
       "@id": `${SITE_URL}/#app`,
-      name: "Digital Price Tag Calculator",
+      name: "How Much Is Your Data Worth? — Data Value Calculator",
       url: SITE_URL,
       applicationCategory: "UtilityApplication",
       operatingSystem: "Any",
