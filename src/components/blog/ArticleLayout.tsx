@@ -33,7 +33,7 @@ export function ArticleLayout({
       "@type": "WebPage",
       "@id": `https://trafi.cc/blog/${article.slug}/`,
     },
-    image: "https://trafi.cc/og.png",
+    image: "https://trafi.cc/og.jpg",
     keywords: article.tags.join(", "),
   };
 

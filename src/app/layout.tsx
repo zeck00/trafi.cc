@@ -25,7 +25,7 @@ const SITE_URL = "https://trafi.cc";
 const SITE_NAME = "trafi.cc";
 const SITE_TITLE = "How Much Is Your Data Worth? Free Calculator | trafi.cc";
 const SITE_DESCRIPTION =
-  "Calculate how much your personal data is worth to Facebook, Google, TikTok, ChatGPT, and 60+ platforms. Based on real SEC filings and published ARPU rates. Free, private, no signup.";
+  "Calculate how much your data is worth to Facebook, Google, TikTok, ChatGPT and 60+ platforms. Real ARPU from SEC filings. Free, no signup.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -83,11 +83,11 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     images: [
       {
-        url: "/og.png",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
         alt: "trafi.cc — See what your data is worth to advertisers",
-        type: "image/png",
+        type: "image/jpeg",
       },
     ],
   },
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/og.jpg"],
     creator: "@zeck00",
   },
   alternates: {
